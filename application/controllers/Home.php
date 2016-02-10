@@ -12,43 +12,50 @@ class Home extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('players_model');
-        $this->load->model('stocks_model');
-        $this->load->helper('url');
     }
 
 
     public function index()
     {
-        $this->players_panel();
+        $data = array(
+            'page_title' => 'Home',
+        );
 
+        $this->parser->parse('header', $data);
+        $this->players_panel();
         $this->stocks_panel();
+        $this->load->view('footer');
 
     }
+    public function players_panel()
+    {
+        $result = '';
+        $q = $this->players_model->get_all();
+
+        foreach ($q->result() as $row) {
+            $result .= $this->parser->parse('home/player_row', (array) $row, true);
+        }
+
+        $data['rows'] = $result;
+
+        return $this->parser->parse('home/players_table', $data);
+    }
+
 
     public function stocks_panel()
     {
+        $result = '';
         $q = $this->stocks_model->get_all();
 
-        foreach ($q->result() as $row){
-            echo "<a href='/history/stock/" . $row->Code . "'>" . $row->Code . "</a>";
-            echo $row->Name;
-            echo $row->Category;
-            echo $row->Value;
-            echo "<br />";
+        foreach ($q->result() as $row) {
+            $result .= $this->parser->parse('home/stock_row', (array) $row, true);
         }
+
+        $data['rows'] = $result;
+
+        return $this->parser->parse('home/stocks_table', $data);
     }
 
-    public function players_panel()
-    {
-        $q = $this->players_model->get_all();
 
-        foreach ($q->result() as $row)
-        {
-            echo $row->Player;
-            echo $row->Cash;
-            echo "<br />";
-        }
-    }
 
 }
