@@ -10,35 +10,51 @@ class History extends CI_Controller {
 
     public function index()
     {
-        echo "hello world";
-    }
+        $data = array(
+            'page_title' => 'History',
+        );
 
-    public function display()
-    {
-        $this->load->model('movements');
-        $q = $this->movements->all_movements();
-        echo "<table border='1'><tr>";
-        foreach($q->result_array() as $row) {
-            echo "<td><a href='/history/stock/" . $row['Code'] . "'>" . $row['Code'] . "</a></td>";
-            echo "<td>" . $row['Action'] . "</td>";
-            echo "<td>" . $row['Amount'] . "</td>";
-            echo "<td>" . $row['Datetime'] . "</td></tr>";
-        }
-        echo "</table>";
+        $this->parser->parse('header', $data);
+        $this->movements_panel();
+        $this->transactions_panel();
+        $this->load->view('footer');
+
     }
 
     public function stock($i)
     {
-        $this->load->model('movements');
-        $q = $this->movements->details($i);
-        echo "<table border='1'><tr>";
-        foreach($q->result_array() as $row) {
-            echo "<td>" . $row['Player'] . "</td>";
-            echo "<td>" . $row['Trans'] . "</td>";
-            echo "<td>" . $row['Quantity'] . "</td>";
-            echo "<td>" . $row['DateTime'] . "</td></tr>";
+        $data = array(
+            'page_title' => 'History',
+        );
+
+        $this->parser->parse('header', $data);
+        $this->movements_panel($i);
+        $this->transactions_panel($i);
+        $this->load->view('footer');
+    }
+
+    public function movements_panel($i)
+    {
+        $result = '';
+        $q = $this->movements_model->details($i);
+        foreach($q->result() as $row) {
+            $result .= $this->parser->parse('home/movements/movements_row', (array) $row, true);
         }
-        echo "</table>";
+
+        $data['rows'] = $result;
+        return $this->parser->parse('home/movements/movements_table', $data);
+    }
+
+    public function transactions_panel($i)
+    {
+        $result = '';
+        $q = $this->transactions_model->details($i);
+        foreach($q->result() as $row) {
+            $result .= $this->parser->parse('home/transactions/transactions_row', (array) $row, true);
+        }
+
+        $data['rows'] = $result;
+        return $this->parser->parse('home/transactions/transactions_table', $data);
     }
 
 
