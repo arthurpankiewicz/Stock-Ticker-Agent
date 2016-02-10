@@ -1,4 +1,5 @@
-<table class="table">
+<h2>Movements</h2>
+<table class="table table-bordered">
     <tr>
         <th>Code</th>
         <th>Action</th>
