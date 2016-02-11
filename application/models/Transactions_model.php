@@ -23,4 +23,10 @@ class Transactions_model extends CI_Model
         $query = $this->db->query('SELECT * FROM transactions WHERE Stock = "' . $i .'"');
         return $query;
     }
+
+    function get_player_transaction($i)
+    {
+        $query = $this->db->query('SELECT DateTime, Stock, Trans, Quantity FROM transactions where Player = "' . $i. '" ORDER BY DateTime DESC');
+        return $query;
+    }
 }
