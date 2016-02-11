@@ -23,4 +23,10 @@ class Stocks_model extends CI_Model
         $query = $this->db->query('SELECT * FROM stocks');
         return $query;
     }
+
+    public function stock_name()
+    {
+        $query = $this->db->query('SELECT Code, Name FROM stocks');
+        return $query;
+    }
 }

@@ -28,6 +28,7 @@ class History extends CI_Controller {
         );
 
         $this->parser->parse('header', $data);
+        $this->build_dropdown();
         $this->movements_panel($i);
         $this->transactions_panel($i);
         $this->load->view('footer');
@@ -38,11 +39,11 @@ class History extends CI_Controller {
         $result = '';
         $q = $this->movements_model->details($i);
         foreach($q->result() as $row) {
-            $result .= $this->parser->parse('home/movements/movements_row', (array) $row, true);
+            $result .= $this->parser->parse('movements/movements_row', (array) $row, true);
         }
 
         $data['rows'] = $result;
-        return $this->parser->parse('home/movements/movements_table', $data);
+        return $this->parser->parse('movements/movements_table', $data);
     }
 
     public function transactions_panel($i)
@@ -50,11 +51,23 @@ class History extends CI_Controller {
         $result = '';
         $q = $this->transactions_model->details($i);
         foreach($q->result() as $row) {
-            $result .= $this->parser->parse('home/transactions/transactions_row', (array) $row, true);
+            $result .= $this->parser->parse('transactions/transactions_row', (array) $row, true);
         }
 
         $data['rows'] = $result;
-        return $this->parser->parse('home/transactions/transactions_table', $data);
+        return $this->parser->parse('transactions/transactions_table', $data);
+    }
+
+    public function build_dropdown()
+    {
+        $result = '';
+        $q = $this->stocks_model->stock_name();
+        foreach($q->result() as $row) {
+            $result .= $this->parser->parse('dropdown_option', (array) $row, true);
+        }
+
+        $data['options'] = $result;
+        return $this->parser->parse('dropdown', $data);
     }
 
 
