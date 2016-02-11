@@ -28,7 +28,7 @@ class History extends CI_Controller {
         );
 
         $this->parser->parse('header', $data);
-
+        $this->build_dropdown();
         $this->movements_panel($i);
         $this->transactions_panel($i);
         $this->load->view('footer');
@@ -56,6 +56,18 @@ class History extends CI_Controller {
 
         $data['rows'] = $result;
         return $this->parser->parse('transactions/transactions_table', $data);
+    }
+
+    public function build_dropdown()
+    {
+        $result = '';
+        $q = $this->stocks_model->stock_name();
+        foreach($q->result() as $row) {
+            $result .= $this->parser->parse('dropdown_option', (array) $row, true);
+        }
+
+        $data['options'] = $result;
+        return $this->parser->parse('dropdown', $data);
     }
 
 
