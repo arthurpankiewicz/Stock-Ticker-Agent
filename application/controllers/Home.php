@@ -21,11 +21,13 @@ class Home extends MY_Controller
         $this->data['players-panel'] = $this->players_panel();
         $this->data['stocks-panel'] = $this->stocks_panel();
 
-
         $this->data['pagebody'] = 'home/home';
         $this->render();
     }
 
+    /*
+     * Displays all users and their cash in a table
+     */
     public function players_panel()
     {
         $result = '';
@@ -41,6 +43,9 @@ class Home extends MY_Controller
     }
 
 
+    /*
+     * Displays all the stocks in a table
+     */
     public function stocks_panel()
     {
         $result = '';

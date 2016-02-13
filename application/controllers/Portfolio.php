@@ -14,6 +14,7 @@ class Portfolio extends MY_Controller{
 
     public function index()
     {
+        //if a user session is found load their profile
         if( $this->session->userdata('username') ){
             $this->profile();
         } else{
@@ -21,6 +22,10 @@ class Portfolio extends MY_Controller{
         }
     }
 
+    /*
+     * Login
+     * Creates a session variable based on username
+     */
     public function login()
     {
         if($this->input->post('input-username')){
@@ -39,22 +44,30 @@ class Portfolio extends MY_Controller{
         }
     }
 
+    /*
+     * Destroys the user session
+     */
     public function logout(){
         $this->session->unset_userdata('username');
         $this->data['login-menu'] = $this->parser->parse("login/login_menu", $this->data, true);
         $this->index();
     }
 
+    /*
+     * Displays the profile for the current user
+     */
     public function profile()
     {
         $this->data['page_title'] = $this->session->userdata('username');
         $this->data['player-activity'] = $this->trade_activity($this->session->userdata('username'));
-
         $this->data['pagebody'] = 'portfolio/portfolio';
         $this->render();
     }
 
 
+    /*
+     * Displays the profile for a specific user
+     */
     public function detail($i)
     {
         $this->data['page_title'] = $i;
@@ -63,6 +76,9 @@ class Portfolio extends MY_Controller{
         $this->render();
     }
 
+    /*
+     * Displays the trade activity table for a specific user
+     */
     public function trade_activity($i)
     {
         $result = '';

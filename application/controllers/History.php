@@ -25,6 +25,9 @@ class History extends MY_Controller {
         $this->render();
     }
 
+    /*
+     * Displays the movements and transactions for a specific stock
+     */
     public function stock($i)
     {
         $this->data['page_title'] = $i;
@@ -34,6 +37,9 @@ class History extends MY_Controller {
         $this->render();
     }
 
+    /*
+     * Displays all the movements in a table for a specific stock
+     */
     public function movements_panel($i)
     {
         $result = '';
@@ -46,6 +52,9 @@ class History extends MY_Controller {
         return $this->parser->parse('history/movements_table', $data, true);
     }
 
+    /*
+     * Displays all transactions in a table for a specific stock
+     */
     public function transactions_panel($i)
     {
         $result = '';
