@@ -21,4 +21,10 @@ class Players_model extends CI_Model {
         $query = $this->db->query('SELECT * FROM players');
         return $query;
     }
+
+    public function get_names()
+    {
+        $query = $this->db->query('SELECT Player FROM players');
+        return $query;
+    }
 }

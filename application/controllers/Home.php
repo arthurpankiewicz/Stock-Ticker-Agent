@@ -1,4 +1,4 @@
-    <?php
+<?php
 
 /**
  * Created by PhpStorm.
@@ -19,14 +19,16 @@ class Home extends CI_Controller
     {
         $data = array(
             'page_title' => 'Home',
+            'stocks-drop' => $this->stocks_dropdown(),
+            'players-drop' => $this->players_dropdown(),
         );
 
         $this->parser->parse('header', $data);
         $this->players_panel();
         $this->stocks_panel();
         $this->load->view('footer');
-
     }
+
     public function players_panel()
     {
         $result = '';
@@ -54,6 +56,30 @@ class Home extends CI_Controller
         $data['rows'] = $result;
 
         return $this->parser->parse('home/stocks_table', $data);
+    }
+
+    public function stocks_dropdown()
+    {
+        $result = '';
+        $q = $this->stocks_model->stock_name();
+        foreach($q->result() as $row) {
+            $result .= $this->parser->parse('stocks_option', (array) $row, true);
+        }
+
+        $data['options'] = $result;
+        return $this->parser->parse('dropdown', $data);
+    }
+
+    public function players_dropdown()
+    {
+        $result = '';
+        $q = $this->players_model->get_names();
+        foreach($q->result() as $row) {
+            $result .= $this->parser->parse('players_option', (array) $row, true);
+        }
+
+        $data['options'] = $result;
+        return $this->parser->parse('dropdown', $data);
     }
 
 

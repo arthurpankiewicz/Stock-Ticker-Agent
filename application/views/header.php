@@ -22,6 +22,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         width: 75%;
         margin: 0 auto;
     }
+
+    .dropdown:hover .dropdown-menu {
+        display: block;
+    }
+
 </style>
 
 <body>
@@ -38,10 +43,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">History</a></li>
-                <li><a href="#">Portfolio</a></li>
+                <li class=""><a href="/home">Home</a></li>
+                <li class="dropdown">
+                    <a href="/history">History <b class="caret"></b></a>
+                    {stocks-drop}
+                </li>
+                <li class="dropdown">
+                    <a href="/players">Portfolio <b class="caret"></b></a>
+                    {players-drop}
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>

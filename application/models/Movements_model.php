@@ -20,7 +20,16 @@ class Movements_model extends CI_Model
 
     function details($i)
     {
-        $query = $this->db->query('SELECT * FROM movements WHERE Code = "' . $i .'"');
+        $query = $this->db->query('SELECT * FROM movements WHERE Code = "' . $i .'" ORDER BY Datetime DESC');
         return $query;
+    }
+
+    function most_recent()
+    {
+        $query = $this->db->query('SELECT Code from movements ORDER BY Datetime DESC LIMIT 1');
+        foreach($query->result() as $row)
+            $result = $row;
+        $result = $result->Code;
+        return $result;
     }
 }

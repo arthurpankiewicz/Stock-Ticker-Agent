@@ -20,7 +20,7 @@ class Transactions_model extends CI_Model
 
     function details($i)
     {
-        $query = $this->db->query('SELECT * FROM transactions WHERE Stock = "' . $i .'"');
+        $query = $this->db->query('SELECT * FROM transactions WHERE Stock = "' . $i .'" ORDER BY Datetime DESC');
         return $query;
     }
 
