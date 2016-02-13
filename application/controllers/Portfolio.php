@@ -14,18 +14,20 @@ class Portfolio extends MY_Controller{
 
     public function index()
     {
-        echo "hello world";
+
+        $this->data['page_title'] = "Player";
+        $this->data['player-activity'] = $this->trade_activity("Donald");
+
+        $this->data['pagebody'] = 'portfolio/portfolio';
+        $this->render();
     }
 
     public function detail($i)
     {
-        $data = array(
-            'page_title' => $i
-        );
-
-        $this->parser->parse('header', $data);
-        $this->trade_activity($i);
-        $this->load->view('footer');
+        $this->data['page_title'] = $i;
+        $this->data['player-activity'] = $this->trade_activity($i);
+        $this->data['pagebody'] = 'portfolio/portfolio';
+        $this->render();
     }
 
     public function trade_activity($i)
@@ -34,11 +36,10 @@ class Portfolio extends MY_Controller{
         $q = $this->transactions_model->get_player_transaction($i);
 
         foreach($q->result() as $row){
-            $result .= $this->parser->parse('transactions/trading_activity_row', (array) $row, true);
+            $result .= $this->parser->parse('portfolio/trading_activity_row', (array) $row, true);
         }
 
-        ;
-        return $this->parser->parse('transactions/trading_activity_table' , array('rows' => $result));
+        return $this->parser->parse('portfolio/trading_activity_table' , array('rows' => $result), true);
     }
 
 }

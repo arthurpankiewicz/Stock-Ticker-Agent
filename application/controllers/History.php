@@ -39,11 +39,11 @@ class History extends MY_Controller {
         $result = '';
         $q = $this->movements_model->details($i);
         foreach($q->result() as $row) {
-            $result .= $this->parser->parse('movements/movements_row', (array) $row, true);
+            $result .= $this->parser->parse('history/movements_row', (array) $row, true);
         }
 
         $data['rows'] = $result;
-        return $this->parser->parse('movements/movements_table', $data, true);
+        return $this->parser->parse('history/movements_table', $data, true);
     }
 
     public function transactions_panel($i)
@@ -51,11 +51,11 @@ class History extends MY_Controller {
         $result = '';
         $q = $this->transactions_model->details($i);
         foreach($q->result() as $row) {
-            $result .= $this->parser->parse('transactions/transactions_row', (array) $row, true);
+            $result .= $this->parser->parse('history/transactions_row', (array) $row, true);
         }
 
         $data['rows'] = $result;
-        return $this->parser->parse('transactions/transactions_table', $data, true);
+        return $this->parser->parse('history/transactions_table', $data, true);
     }
 
 }

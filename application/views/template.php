@@ -51,7 +51,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     {stocks-drop}
                 </li>
                 <li class="dropdown">
-                    <a href="/players">Portfolio <b class="caret"></b></a>
+                    <a href="/portfolio">Portfolio <b class="caret"></b></a>
                     {players-drop}
                 </li>
             </ul>
