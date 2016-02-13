@@ -72,5 +72,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     {content}
 </div>
 
+
+<footer class="container-fluid text-center">
+    <p>Jacky Lui & Arthur Pankiewicz</p>
+</footer>
+
 </body>
 </html>
