@@ -5,7 +5,12 @@
  * Date: 2016-02-03
  * Time: 10:48 AM
  */
-class History extends CI_Controller {
+class History extends MY_Controller {
+
+
+    public function __construct(){
+        parent::__construct();
+    }
 
 
     public function index()
@@ -60,30 +65,6 @@ class History extends CI_Controller {
 
         $data['rows'] = $result;
         return $this->parser->parse('transactions/transactions_table', $data);
-    }
-
-    public function stocks_dropdown()
-    {
-        $result = '';
-        $q = $this->stocks_model->stock_name();
-        foreach($q->result() as $row) {
-            $result .= $this->parser->parse('stocks_option', (array) $row, true);
-        }
-
-        $data['options'] = $result;
-        return $this->parser->parse('dropdown', $data);
-    }
-
-    public function players_dropdown()
-    {
-        $result = '';
-        $q = $this->players_model->get_names();
-        foreach($q->result() as $row) {
-            $result .= $this->parser->parse('players_option', (array) $row, true);
-        }
-
-        $data['options'] = $result;
-        return $this->parser->parse('dropdown', $data);
     }
 
 }

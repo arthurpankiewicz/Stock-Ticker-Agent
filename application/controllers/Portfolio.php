@@ -6,7 +6,11 @@
  * Date: 16-02-10
  * Time: 1:06 PM
  */
-class Portfolio extends CI_Controller{
+class Portfolio extends MY_Controller{
+
+    public function __construct(){
+        parent::__construct();
+    }
 
     public function index()
     {
@@ -16,7 +20,7 @@ class Portfolio extends CI_Controller{
     public function detail($i)
     {
         $data = array(
-            'page_title' => $i,
+            'page_title' => $i
         );
 
         $this->parser->parse('header', $data);
