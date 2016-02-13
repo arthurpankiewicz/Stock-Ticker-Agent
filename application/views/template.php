@@ -1,6 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-?><!DOCTYPE html>
+?>
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
@@ -18,7 +20,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         border-radius: 0;
     }
 
-    .content{
+    .content {
         width: 75%;
         margin: 0 auto;
     }
@@ -49,12 +51,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     {stocks-drop}
                 </li>
                 <li class="dropdown">
-                    <a href="/players">Portfolio <b class="caret"></b></a>
+                    <a href="/portfolio">Portfolio <b class="caret"></b></a>
                     {players-drop}
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                {login-menu}
             </ul>
         </div>
     </div>
@@ -67,3 +69,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <div class="content">
+    {content}
+</div>
+
+</body>
+</html>

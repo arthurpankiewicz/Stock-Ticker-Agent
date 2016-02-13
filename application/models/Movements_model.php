@@ -12,18 +12,27 @@ class Movements_model extends CI_Model
         parent::__construct();
     }
 
+    /*
+     * Gets all entries from the movements table
+     */
     function get_all()
     {
         $query = $this->db->query('SELECT * FROM movements ORDER BY Datetime DESC');
         return $query;
     }
 
+    /*
+     * Gets entries from the movements table for a specific stock
+     */
     function details($i)
     {
         $query = $this->db->query('SELECT * FROM movements WHERE Code = "' . $i .'" ORDER BY Datetime DESC');
         return $query;
     }
 
+    /*
+     * Gets the most recent stock movement
+     */
     function most_recent()
     {
         $query = $this->db->query('SELECT Code from movements ORDER BY Datetime DESC LIMIT 1');
