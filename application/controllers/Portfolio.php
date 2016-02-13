@@ -8,12 +8,23 @@
  */
 class Portfolio extends CI_Controller{
 
-    public function index($i)
+    public function index()
     {
-        
+        echo "hello world";
     }
 
     public function detail($i)
+    {
+        $data = array(
+            'page_title' => $i,
+        );
+
+        $this->parser->parse('header', $data);
+        $this->trade_activity($i);
+        $this->load->view('footer');
+    }
+
+    public function trade_activity($i)
     {
         $result = '';
         $q = $this->transactions_model->get_player_transaction($i);
@@ -22,8 +33,8 @@ class Portfolio extends CI_Controller{
             $result .= $this->parser->parse('transactions/trading_activity_row', (array) $row, true);
         }
 
-        $data['rows'] = $result;
-        return $this->parser->parse('transactions/trading_activity_table' , $data);
+        ;
+        return $this->parser->parse('transactions/trading_activity_table' , array('rows' => $result));
     }
 
 }
