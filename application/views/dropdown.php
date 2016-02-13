@@ -1,3 +1,3 @@
-<select>
+<ul class="dropdown-menu">
     {options}
-</select>
+</ul>
