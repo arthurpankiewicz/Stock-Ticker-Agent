@@ -53,6 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'home';
 $route['history'] = 'history/index';
 $route['history/stock/(:any)'] = 'history/stock/$1';
+$route['portfolio/logout'] = 'portfolio/logout';
 $route['portfolio/(:any)'] = 'portfolio/detail/$1';
 
 $route['404_override'] = '';

@@ -12,6 +12,11 @@ class MY_Controller extends CI_Controller
 
     public function __construct(){
         parent::__construct();
+        if($this->session->userdata('username')){
+            $this->data['login-menu'] = $this->parser->parse("login/logout_menu", $this->data, true);
+        } else{
+            $this->data['login-menu'] = $this->parser->parse("login/login_menu", $this->data, true);
+        }
         $this->data['stocks-drop'] = $this->stocks_dropdown();
         $this->data['players-drop'] = $this->players_dropdown();
     }

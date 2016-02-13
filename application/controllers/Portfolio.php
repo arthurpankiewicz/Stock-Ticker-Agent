@@ -14,13 +14,46 @@ class Portfolio extends MY_Controller{
 
     public function index()
     {
+        if( $this->session->userdata('username') ){
+            $this->profile();
+        } else{
+            $this->login();
+        }
+    }
 
-        $this->data['page_title'] = "Player";
-        $this->data['player-activity'] = $this->trade_activity("Donald");
+    public function login()
+    {
+        if($this->input->post('input-username')){
+            $newdata = array(
+                'username'  => $this->input->post('input-username')
+            );
+
+            $this->session->set_userdata($newdata);
+            $this->data['login-menu'] = $this->parser->parse("login/logout_menu", $this->data, true);
+            $this->index();
+        } else{
+            $this->data['page_title'] = "Login";
+
+            $this->data['pagebody'] = 'login/login';
+            $this->render();
+        }
+    }
+
+    public function logout(){
+        $this->session->unset_userdata('username');
+        $this->data['login-menu'] = $this->parser->parse("login/login_menu", $this->data, true);
+        $this->index();
+    }
+
+    public function profile()
+    {
+        $this->data['page_title'] = $this->session->userdata('username');
+        $this->data['player-activity'] = $this->trade_activity($this->session->userdata('username'));
 
         $this->data['pagebody'] = 'portfolio/portfolio';
         $this->render();
     }
+
 
     public function detail($i)
     {

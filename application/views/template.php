@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                {login-menu}
             </ul>
         </div>
     </div>
