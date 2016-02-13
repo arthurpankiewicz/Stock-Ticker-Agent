@@ -15,32 +15,23 @@ class History extends MY_Controller {
 
     public function index()
     {
-        $data = array(
-            'page_title' => 'TEST', ///change this later
-            'stocks-drop' => $this->stocks_dropdown(),
-            'players-drop' => $this->players_dropdown(),
-        );
         $recent = $this->movements_model->most_recent();
 
-        $this->parser->parse('header', $data);
-        $this->movements_panel($recent);
-        $this->transactions_panel($recent);
-        $this->load->view('footer');
+        $this->data['page_title'] = "History";
+        $this->data['movements-panel'] = $this->movements_panel($recent);
+        $this->data['transactions-panel'] = $this->transactions_panel($recent);
 
+        $this->data['pagebody'] = 'history/history';
+        $this->render();
     }
 
     public function stock($i)
     {
-        $data = array(
-            'page_title' => 'History',
-            'stocks-drop' => $this->stocks_dropdown(),
-            'players-drop' => $this->players_dropdown(),
-        );
-
-        $this->parser->parse('header', $data);
-        $this->movements_panel($i);
-        $this->transactions_panel($i);
-        $this->load->view('footer');
+        $this->data['page_title'] = $i;
+        $this->data['movements-panel'] = $this->movements_panel($i);
+        $this->data['transactions-panel'] = $this->transactions_panel($i);
+        $this->data['pagebody'] = 'history/history';
+        $this->render();
     }
 
     public function movements_panel($i)
@@ -52,7 +43,7 @@ class History extends MY_Controller {
         }
 
         $data['rows'] = $result;
-        return $this->parser->parse('movements/movements_table', $data);
+        return $this->parser->parse('movements/movements_table', $data, true);
     }
 
     public function transactions_panel($i)
@@ -64,7 +55,7 @@ class History extends MY_Controller {
         }
 
         $data['rows'] = $result;
-        return $this->parser->parse('transactions/transactions_table', $data);
+        return $this->parser->parse('transactions/transactions_table', $data, true);
     }
 
 }
