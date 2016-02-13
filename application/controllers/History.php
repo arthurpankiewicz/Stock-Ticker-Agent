@@ -11,12 +11,15 @@ class History extends CI_Controller {
     public function index()
     {
         $data = array(
-            'page_title' => 'History',
+            'page_title' => 'TEST', ///change this later
+            'stocks-drop' => $this->stocks_dropdown(),
+            'players-drop' => $this->players_dropdown(),
         );
+        $recent = $this->movements_model->most_recent();
 
         $this->parser->parse('header', $data);
-        $this->movements_panel();
-        $this->transactions_panel();
+        $this->movements_panel($recent);
+        $this->transactions_panel($recent);
         $this->load->view('footer');
 
     }
@@ -25,10 +28,11 @@ class History extends CI_Controller {
     {
         $data = array(
             'page_title' => 'History',
+            'stocks-drop' => $this->stocks_dropdown(),
+            'players-drop' => $this->players_dropdown(),
         );
 
         $this->parser->parse('header', $data);
-        $this->build_dropdown();
         $this->movements_panel($i);
         $this->transactions_panel($i);
         $this->load->view('footer');
@@ -58,17 +62,28 @@ class History extends CI_Controller {
         return $this->parser->parse('transactions/transactions_table', $data);
     }
 
-    public function build_dropdown()
+    public function stocks_dropdown()
     {
         $result = '';
         $q = $this->stocks_model->stock_name();
         foreach($q->result() as $row) {
-            $result .= $this->parser->parse('dropdown_option', (array) $row, true);
+            $result .= $this->parser->parse('stocks_option', (array) $row, true);
         }
 
         $data['options'] = $result;
         return $this->parser->parse('dropdown', $data);
     }
 
+    public function players_dropdown()
+    {
+        $result = '';
+        $q = $this->players_model->get_names();
+        foreach($q->result() as $row) {
+            $result .= $this->parser->parse('players_option', (array) $row, true);
+        }
+
+        $data['options'] = $result;
+        return $this->parser->parse('dropdown', $data);
+    }
 
 }
