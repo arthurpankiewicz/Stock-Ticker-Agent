@@ -33,3 +33,7 @@
 * Added login
 * Added footer
 * Added comments
+* Modified jumbotrons to display current page
+* Added a new table in db for players holdings
+* Modified home table to display player equity
+* Added .sql file
