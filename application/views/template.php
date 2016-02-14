@@ -64,7 +64,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="jumbotron">
     <div class="container text-center">
-        <h1>Stock Ticker Agent</h1>
+        <h1>{jumbo}</h1>
     </div>
 </div>
 

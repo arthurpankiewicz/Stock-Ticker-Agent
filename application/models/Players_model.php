@@ -33,4 +33,17 @@ class Players_model extends CI_Model {
         $query = $this->db->query('SELECT Player FROM players');
         return $query;
     }
+
+    /*
+     * Returns the cash value a player has in stocks
+     */
+    public function get_stock_value($i)
+    {
+        $sum = 0;
+        $query = $this->db->query('SELECT value, quantity FROM holdings WHERE player = "' . $i . '"');
+        foreach($query->result() as $row) {
+            $sum += $row->value * $row->quantity;
+        }
+        return $sum;
+    }
 }

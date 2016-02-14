@@ -18,9 +18,9 @@ class History extends MY_Controller {
         $recent = $this->movements_model->most_recent();
 
         $this->data['page_title'] = "History";
+        $this->data['jumbo'] = $recent . " - $" . $this->stocks_model->get_value($recent);
         $this->data['movements-panel'] = $this->movements_panel($recent);
         $this->data['transactions-panel'] = $this->transactions_panel($recent);
-
         $this->data['pagebody'] = 'history/history';
         $this->render();
     }
@@ -31,6 +31,7 @@ class History extends MY_Controller {
     public function stock($i)
     {
         $this->data['page_title'] = $i;
+        $this->data['jumbo'] = $i . " - $" . $this->stocks_model->get_value($i);
         $this->data['movements-panel'] = $this->movements_panel($i);
         $this->data['transactions-panel'] = $this->transactions_panel($i);
         $this->data['pagebody'] = 'history/history';
@@ -53,7 +54,7 @@ class History extends MY_Controller {
     }
 
     /*
-     * Displays all transactions in a table for a specific stock
+     * Displays all transactions in a table for a specific stock'
      */
     public function transactions_panel($i)
     {
