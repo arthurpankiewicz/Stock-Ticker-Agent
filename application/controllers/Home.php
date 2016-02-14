@@ -14,7 +14,9 @@ class Home extends MY_Controller
         parent::__construct();
     }
 
-
+    /*
+     * Displays all players and their equity, as well as all stocks and their value
+     */
     public function index()
     {
         $this->data['page_title'] = "Home";

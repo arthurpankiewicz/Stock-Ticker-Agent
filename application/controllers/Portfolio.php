@@ -32,7 +32,6 @@ class Portfolio extends MY_Controller{
             $newdata = array(
                 'username'  => $this->input->post('input-username')
             );
-            $this->data['jumbo'] = $newdata['username'];
             $this->session->set_userdata($newdata);
             $this->data['login-menu'] = $this->parser->parse("login/logout_menu", $this->data, true);
             $this->index();
@@ -59,7 +58,7 @@ class Portfolio extends MY_Controller{
     public function profile()
     {
         $this->data['page_title'] = $this->session->userdata('username');
-        $this->data['jumbo '] = $this->session->userdata('username');
+        $this->data['jumbo'] = $this->session->userdata('username');
         $this->data['player-activity'] = $this->trade_activity($this->session->userdata('username'));
         $this->data['pagebody'] = 'portfolio/portfolio';
         $this->render();

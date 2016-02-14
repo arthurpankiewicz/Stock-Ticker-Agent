@@ -31,6 +31,9 @@ class MY_Controller extends CI_Controller
         $this->parser->parse('template', $this->data);
     }
 
+    /*
+     * Constructs the hover over dropdown in the navbar for stocks
+     */
     public function stocks_dropdown()
     {
         $result = '';
@@ -43,6 +46,9 @@ class MY_Controller extends CI_Controller
         return $this->parser->parse('dropdown', $data);
     }
 
+    /*
+     * Constructs the hover over dropdown in the navbar for players
+     */
     public function players_dropdown()
     {
         $result = '';
