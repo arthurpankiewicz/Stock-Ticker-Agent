@@ -18,9 +18,9 @@ class Home extends MY_Controller
     public function index()
     {
         $this->data['page_title'] = "Home";
+        $this->data['jumbo'] = "Stock Ticker Agent";
         $this->data['players-panel'] = $this->players_panel();
         $this->data['stocks-panel'] = $this->stocks_panel();
-
         $this->data['pagebody'] = 'home/home';
         $this->render();
     }
@@ -31,9 +31,12 @@ class Home extends MY_Controller
     public function players_panel()
     {
         $result = '';
+
         $q = $this->players_model->get_all();
 
         foreach ($q->result() as $row) {
+            $row->StockValue = $this->players_model->get_stock_value($row->Player);
+            $row->Equity = $row->StockValue + $row->Cash;
             $result .= $this->parser->parse('home/player_row', (array) $row, true);
         }
 

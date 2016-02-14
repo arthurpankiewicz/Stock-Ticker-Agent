@@ -3,6 +3,8 @@
     <tr>
         <th>Player</th>
         <th>Cash</th>
+        <th>Stock Value</th>
+        <th>Equity</th>
     </tr>
     {rows}
 </table>
