@@ -31,7 +31,7 @@ class Transactions_model extends CI_Model
     }
 
     /*
-     * Gets alll the transaction for a specific player based on time
+     * Gets all the transaction for a specific player based on time
      */
     function get_player_transaction($i)
     {

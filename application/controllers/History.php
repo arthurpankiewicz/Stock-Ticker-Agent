@@ -12,11 +12,12 @@ class History extends MY_Controller {
         parent::__construct();
     }
 
-
+    /*
+     * Displays the movements and transactions of the most recently moved stock
+     */
     public function index()
     {
         $recent = $this->movements_model->most_recent();
-
         $this->data['page_title'] = "History";
         $this->data['jumbo'] = $recent . " - $" . $this->stocks_model->get_value($recent);
         $this->data['movements-panel'] = $this->movements_panel($recent);

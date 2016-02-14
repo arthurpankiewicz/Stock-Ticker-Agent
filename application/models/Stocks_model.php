@@ -36,6 +36,9 @@ class Stocks_model extends CI_Model
         return $query;
     }
 
+    /*
+     * Returns the value of a specific stock
+     */
     public function get_value($i)
     {
         $query = $this->db->query('SELECT Value FROM stocks WHERE Code = "' . $i . '"');
