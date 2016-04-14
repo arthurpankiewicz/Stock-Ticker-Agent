@@ -1,4 +1,4 @@
-<h2>Transactions</h2>
+<h2>Recent Transactions</h2>
 <table class="table table-bordered">
     <tr>
         <th>Seq</th>
@@ -9,7 +9,7 @@
         <th>Transaction</th>
         <th>Quantity</th>
     </tr>
-    {transactions}
+    {recent_transactions}
     <tr>
         <td>{seq}</td>
         <td>{datetime}</td>
@@ -19,5 +19,5 @@
         <td>{trans}</td>
         <td>{quantity}</td>
     </tr>
-    {/transactions}
+    {/recent_transactions}
 </table>

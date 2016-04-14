@@ -6,5 +6,12 @@
         <th>Category</th>
         <th>Value</th>
     </tr>
-    {rows}
+    {stocks}
+    <tr>
+        <td><a href="/history/stock/{code}">{code}</a></td>
+        <td>{name}</td>
+        <td>{category}</td>
+        <td>{value}</td>
+    </tr>
+    {/stocks}
 </table>

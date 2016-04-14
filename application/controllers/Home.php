@@ -23,6 +23,8 @@ class Home extends MY_Controller
         $this->data['jumbo'] = "Stock Ticker Agent";
         $this->data['players-panel'] = $this->players_panel();
         $this->data['stocks-panel'] = $this->stocks_panel();
+        $this->data['recent-movements-panel'] = $this->recent_movements_panel();
+        $this->data['recent-transactions-panel'] = $this->recent_transactions_panel();
         $this->data['pagebody'] = 'home/home';
         $this->render();
     }
@@ -53,16 +55,19 @@ class Home extends MY_Controller
      */
     public function stocks_panel()
     {
-        $result = '';
-        $q = $this->stocks_model->get_all();
-
-        foreach ($q->result() as $row) {
-            $result .= $this->parser->parse('home/stock_row', (array) $row, true);
-        }
-
-        $data['rows'] = $result;
-
+        $data['stocks'] = $this->stocks_model->get_all_stocks('http://bsx.jlparry.com/data/stocks');
         return $this->parser->parse('home/stocks_table', $data, true);
+    }
+
+    public function recent_movements_panel()
+    {
+        $data['recent_movements'] = $this->movements_model->get_recent_movements('http://bsx.jlparry.com/data/movement');
+        return $this->parser->parse('home/recent_movements_table', $data, true);
+    }
+
+    public function recent_transactions_panel() {
+        $data['recent_transactions'] = $this->transactions_model->get_recent_transactions('http://bsx.jlparry.com/data/transactions');
+        return $this->parser->parse('home/recent_transactions_table', $data, true);
     }
 
 

@@ -32,41 +32,48 @@ class History extends MY_Controller {
     public function stock($i)
     {
         $this->data['page_title'] = $i;
-        $this->data['jumbo'] = $i . " - $" . $this->stocks_model->get_value($i);
+        $this->data['jumbo'] = $i . " - $" . $this->stocks_model->get_stock_value($i);
         $this->data['movements-panel'] = $this->movements_panel($i);
         $this->data['transactions-panel'] = $this->transactions_panel($i);
         $this->data['pagebody'] = 'history/history';
         $this->render();
     }
 
-    /*
-     * Displays all the movements in a table for a specific stock
-     */
-    public function movements_panel($i)
-    {
-        $result = '';
-        $q = $this->movements_model->details($i);
-        foreach($q->result() as $row) {
-            $result .= $this->parser->parse('history/movements_row', (array) $row, true);
-        }
-
-        $data['rows'] = $result;
-        return $this->parser->parse('history/movements_table', $data, true);
-    }
-
-    /*
-     * Displays all transactions in a table for a specific stock'
-     */
+//    /*
+//     * Displays all the movements in a table for a specific stock
+//     */
+//    public function movements_panel($i)
+//    {
+//        $result = '';
+//        $q = $this->movements_model->details($i);
+//        foreach($q->result() as $row) {
+//            $result .= $this->parser->parse('history/movements_row', (array) $row, true);
+//        }
+//
+//        $data['rows'] = $result;
+//        return $this->parser->parse('history/movements_table', $data, true);
+//    }
+//
+//    /*
+//     * Displays all transactions in a table for a specific stock'
+//     */
     public function transactions_panel($i)
     {
-        $result = '';
-        $q = $this->transactions_model->details($i);
-        foreach($q->result() as $row) {
-            $result .= $this->parser->parse('history/transactions_row', (array) $row, true);
-        }
-
-        $data['rows'] = $result;
+//        $result = '';
+//        $q = $this->transactions_model->details($i);
+//        foreach($q->result() as $row) {
+//            $result .= $this->parser->parse('history/transactions_row', (array) $row, true);
+//        }
+//
+//        $data['rows'] = $result;
+//        return $this->parser->parse('history/transactions_table', $data, true);
+        $data['transactions'] = $this->transactions_model->get_stock_transactions($i);
         return $this->parser->parse('history/transactions_table', $data, true);
     }
 
+    public function movements_panel($i)
+    {
+        $data['movements'] = $this->movements_model->get_stock_movements($i);
+        return $this->parser->parse('history/movements_table', $data, true);
+    }
 }

@@ -1,4 +1,4 @@
-<h2>Movements</h2>
+<h2>Recent Movements</h2>
 <table class="table table-bordered">
     <tr>
         <th>Seq</th>
@@ -7,7 +7,7 @@
         <th>Action</th>
         <th>Amount</th>
     </tr>
-    {movements}
+    {recent_movements}
     <tr>
         <td>{seq}</td>
         <td>{datetime}</td>
@@ -15,5 +15,5 @@
         <td>{action}</td>
         <td>{amount}</td>
     </tr>
-    {/movements}
+    {/recent_movements}
 </table>

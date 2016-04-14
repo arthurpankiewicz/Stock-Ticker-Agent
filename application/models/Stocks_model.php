@@ -44,6 +44,37 @@ class Stocks_model extends CI_Model
         $query = $this->db->query('SELECT Value FROM stocks WHERE Code = "' . $i . '"');
         foreach($query->result() as $row)
             $value = $row->Value;
+        return 1;
+    }
+
+    public function get_stock_value($i)
+    {
+        $value = '';
+        $url_stocks = 'http://bsx.jlparry.com/data/stocks';
+        if(($handle = fopen($url_stocks , 'r')) !== false) {
+            while(($data = fgetcsv($handle, 1024, ',', '"')) !== false) {
+                if($data[0] == $i) {
+                    $value = $data[3];
+                }
+            }
+            fclose($handle);
+        }
         return $value;
     }
+
+    public function get_all_stocks($url) {
+        $stocks = array();
+        if(($handle = fopen($url, 'r')) !== false) {
+            while(($data = fgetcsv($handle, 1024, ',', '"')) !== false) {
+                $stocks[] = array('code' => $data[0], 'name' => $data[1],
+                    'category' => $data[2], 'value' => $data[3]);
+            }
+            fclose($handle);
+        }
+        array_shift($stocks);
+        return $stocks;
+    }
+
+
+
 }
